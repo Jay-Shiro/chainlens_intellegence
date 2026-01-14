@@ -3,6 +3,21 @@ from fastapi import FastAPI, Query
 import os
 import requests
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+app = FastAPI(
+    title="ChainLens API",
+    description="Instant Web3 Wallet Intelligence",
+    version="1.0.0"
+)
+
+@app.get("/")
+def read_root():
+    """
+    Root endpoint to confirm API is running.
+    """
+    return {"message": "Welcome to the Delivery App API"}
 
 # ============ CHAIN CONFIGURATION ============
 CHAIN_CONFIG = {
@@ -93,11 +108,6 @@ def generate_flags(age_days, activity, tx_30d):
 
     return flags
 
-app = FastAPI(
-    title="ChainLens API",
-    description="Instant Web3 Wallet Intelligence",
-    version="1.0.0"
-)
 
 @app.get("/api/v1/wallet/snapshot")
 def wallet_snapshot(
